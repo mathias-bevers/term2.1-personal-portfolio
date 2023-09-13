@@ -5,10 +5,11 @@ IndentWidth: 4
 Language: Cpp
 IndentExternBlock: AfterExternBlock
 FixNamespaceComments: false
-BraceWrapping:
-  AfterExternBlock: false
 NamespaceIndentation: All
 AllowShortFunctionsOnASingleLine: All
 AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 AlwaysBreakAfterReturnType: None
 ColumnLimit: 0
+BreakBeforeBraces: Custom
+BraceWrapping:
+  BeforeCatch: true
