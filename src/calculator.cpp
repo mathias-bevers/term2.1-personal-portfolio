@@ -31,7 +31,7 @@ namespace personal_portfolio {
             break;
         case 2:
             result = subtract(a, b);
-            symbol + '-';
+            symbol = '-';
             break;
         case 3:
             result = multiply(a, b);
