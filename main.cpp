@@ -2,8 +2,13 @@
 #include <iostream>
 #include <limits>
 
-int main() {
+#include "src/tools/easylogging++.h"
+
+INITIALIZE_EASYLOGGINGPP
+
+int main(int argc, char* argv[]) {
     std::cout << "Mathias Bevers personal portfolio 1\n\n";
+    LOG(INFO) << "My first info log using default logger";
 
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
     sf::CircleShape shape(100.f);

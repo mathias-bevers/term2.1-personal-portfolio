@@ -10,6 +10,7 @@ all: reset main clean
 
 reset: 
 	rm -rf ./$(BUILD_DIR)*.out
+	rm -rf ./$(BUILD_DIR)*.log 
 
 clean:
 	mv *.o $(BUILD_DIR)
@@ -17,7 +18,7 @@ clean:
 
 # To run SFML add flags '-lsfml-graphics -lsfml-window -lsfml-system'
 main: main.o
-	$(CC) $(CFLAGS) -o $(TARGET) main.o -lsfml-graphics -lsfml-window -lsfml-system
+	$(CC) $(CFLAGS) -o $(TARGET) main.o src/tools/easylogging++.cc -lsfml-graphics -lsfml-window -lsfml-system
 
 main.o:
 	$(CC) $(CFLAGS) -c main.cpp
