@@ -1,0 +1,15 @@
+# We'll use defaults from the LLVM style, but with 4 columns indentation.
+BasedOnStyle: LLVM
+IndentWidth: 4
+---
+Language: Cpp
+IndentExternBlock: AfterExternBlock
+FixNamespaceComments: false
+NamespaceIndentation: All
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AlwaysBreakAfterReturnType: None
+ColumnLimit: 0
+BreakBeforeBraces: Custom
+BraceWrapping:
+  BeforeCatch: true
