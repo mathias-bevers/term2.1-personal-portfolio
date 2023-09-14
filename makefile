@@ -15,11 +15,8 @@ clean:
 	mv *.o $(BUILD_DIR)
 	mv *.out $(BUILD_DIR)
 
-main: main.o calculator.o
-	$(CC) $(CFLAGS) -o $(TARGET) main.o calculator.o
+main: main.o
+	$(CC) $(CFLAGS) -o $(TARGET) main.o
 
-main.o: main.cpp 
+main.o:
 	$(CC) $(CFLAGS) -c main.cpp
-
-calculator.o:
-	$(CC) $(CFLAGS) -c src/calculator.cpp
