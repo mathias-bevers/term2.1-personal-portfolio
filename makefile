@@ -15,8 +15,9 @@ clean:
 	mv *.o $(BUILD_DIR)
 	mv *.out $(BUILD_DIR)
 
+# To run SFML add flags '-lsfml-graphics -lsfml-window -lsfml-system'
 main: main.o
-	$(CC) $(CFLAGS) -o $(TARGET) main.o
+	$(CC) $(CFLAGS) -o $(TARGET) main.o -lsfml-graphics -lsfml-window -lsfml-system
 
 main.o:
 	$(CC) $(CFLAGS) -c main.cpp
