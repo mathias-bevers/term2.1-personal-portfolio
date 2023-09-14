@@ -11,5 +11,7 @@ AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 AlwaysBreakAfterReturnType: None
 ColumnLimit: 0
 BreakBeforeBraces: Custom
+PointerAlignment: Left
+ReferenceAlignment: Left
 BraceWrapping:
   BeforeCatch: true

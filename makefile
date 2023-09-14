@@ -17,8 +17,11 @@ clean:
 	mv *.out $(BUILD_DIR)
 
 # To run SFML add flags '-lsfml-graphics -lsfml-window -lsfml-system'
-main: main.o
-	$(CC) $(CFLAGS) -o $(TARGET) main.o src/tools/easylogging++.cc -lsfml-graphics -lsfml-window -lsfml-system
+main: main.o game.o
+	$(CC) $(CFLAGS) -o $(TARGET) main.o game.o src/tools/easylogging++.cc -lsfml-graphics -lsfml-window -lsfml-system
 
 main.o:
 	$(CC) $(CFLAGS) -c main.cpp
+
+game.o:
+	$(CC) $(CFLAGS) -c  src/game.cpp
