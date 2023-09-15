@@ -1,6 +1,5 @@
 #include <iostream>
 #include <limits>
-
 #include "src/game.hpp"
 #include "src/tools/easylogging++.h"
 
@@ -13,6 +12,6 @@ int main(int argc, char *argv[]) {
 
     pp::Game game;
     game.start();
-
+    
     return 0;
 }

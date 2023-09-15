@@ -1,9 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <SFML/Graphics.hpp>
-
-#include "tools/easylogging++.h"
+#include "player.hpp"
 
 namespace personal_portfolio {
 
@@ -11,14 +9,18 @@ namespace personal_portfolio {
     class Game {
       private:
         sf::RenderWindow window;
-        sf::CircleShape circle;
+        Player player;
 
         void update();
 
       public:
+        static Game* instance;
+
         Game();
         ~Game();
         void start();
+        void close();
+        sf::RenderWindow& getWindow();
     };
 }
 

@@ -8,10 +8,15 @@ FixNamespaceComments: false
 NamespaceIndentation: All
 AllowShortFunctionsOnASingleLine: All
 AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortBlocksOnASingleLine: Empty
 AlwaysBreakAfterReturnType: None
 ColumnLimit: 0
+InsertBraces: true
 BreakBeforeBraces: Custom
 PointerAlignment: Left
 ReferenceAlignment: Left
+SpaceInEmptyBlock: true
 BraceWrapping:
   BeforeCatch: true
+  BeforeElse: true
+  SplitEmptyFunction: false
