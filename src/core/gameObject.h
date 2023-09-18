@@ -11,7 +11,6 @@ namespace personal_portfolio {
         sf::Sprite sprite;
 
       public:
-
         GameObject(std::string sprite_path, sf::Vector2f position);
         GameObject(std::string sprite_path);
         ~GameObject();
@@ -20,7 +19,7 @@ namespace personal_portfolio {
         virtual void update();
 
         sf::Vector2f get_size() const;
-        void set_size(const sf::Vector2f size); 
+        void set_size(const sf::Vector2f size);
 
         const sf::Vector2f get_position() const;
         void set_position(const sf::Vector2f position);

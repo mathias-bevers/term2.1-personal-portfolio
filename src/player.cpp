@@ -6,11 +6,10 @@
 #include "tools/settings.h"
 
 namespace personal_portfolio {
-    Player::Player(std::string sprite_path) : GameObject(sprite_path) { 
-        set_size(sf::Vector2f(500,500));
-    }
+    Player::Player(std::string sprite_path) : GameObject(sprite_path) { set_size(sf::Vector2f(500, 500)); }
 
-    void Player::update() {
+    void Player::update()
+    {
         sf::Vector2f input;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             input.y -= 1;

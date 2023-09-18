@@ -1,10 +1,12 @@
 #include "game.h"
 #include "tools/easylogging++.h"
+#include "scenes/gameScene.h"
 
 namespace personal_portfolio {
     Game* Game::instance;
 
-    Game::Game() {
+    Game::Game()
+    {
         LOG(INFO) << "Setting up game instance...";
 
         if (Game::instance != nullptr) {
@@ -18,10 +20,13 @@ namespace personal_portfolio {
         LOG(INFO) << "Setup complete!";
     }
 
-    void Game::start() {
+    void Game::start()
+    {
         LOG(INFO) << "Starting game...";
 
-        game_objects.push_back(new Player("test.png"));
+        scene_manager.register_scene(*(new GameScene()));
+
+        // scene_manager.load_scene("GameScene");
 
         while (window.isOpen()) {
             sf::Event event;
@@ -38,25 +43,21 @@ namespace personal_portfolio {
         }
     }
 
-    void Game::update() {
-        for (GameObject* game_object : game_objects) {
-            game_object->update();
+    void Game::update()
+    {
+        scene_manager.get_active_scene().update();
+
+        if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+            return;
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-            close();
-        }
+        close();
     }
 
-    void Game::render() {
-        for (GameObject* game_object : game_objects) {
-            game_object->render(window);
-        }
-    }
+    void Game::render() { scene_manager.get_active_scene().render(window); }
 
-    sf::RenderWindow& Game::get_window() { return window; }
-
-    void Game::close() {
+    void Game::close()
+    {
         LOG(INFO) << "Closing game...";
 
         if (&window != nullptr) {
@@ -64,7 +65,8 @@ namespace personal_portfolio {
         }
     }
 
-    Game::~Game() {
+    Game::~Game()
+    {
         LOG(INFO) << "Terminating game instance";
         Game::instance = nullptr;
     }

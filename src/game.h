@@ -3,14 +3,14 @@
 
 #include <vector>
 
-#include "player.h"
+#include "core/sceneManager.h"
 
 namespace personal_portfolio {
     /// @brief Main loop of the game.
     class Game {
       private:
         sf::RenderWindow window;
-        std::vector<GameObject*> game_objects;
+        SceneManager scene_manager;
 
         void update();
         void render();
@@ -22,7 +22,8 @@ namespace personal_portfolio {
         ~Game();
         void start();
         void close();
-        sf::RenderWindow& get_window();
+
+        SceneManager& get_scene_manager() const;
     };
 }
 

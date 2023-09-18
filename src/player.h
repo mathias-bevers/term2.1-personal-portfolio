@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "gameObject.h"
+#include "core/gameObject.h"
 
 namespace personal_portfolio {
     class Player : public GameObject {

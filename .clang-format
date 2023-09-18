@@ -11,12 +11,8 @@ AllowShortBlocksOnASingleLine: Empty
 AlwaysBreakAfterReturnType: None
 ColumnLimit: 110
 InsertBraces: true
-BreakBeforeBraces: Custom
 PointerAlignment: Left
 ReferenceAlignment: Left
 SpaceInEmptyBlock: true
 BreakConstructorInitializers: AfterColon
-BraceWrapping:
-  BeforeCatch: true
-  BeforeElse: true
-  SplitEmptyFunction: false
+BreakBeforeBraces: Stroustrup
