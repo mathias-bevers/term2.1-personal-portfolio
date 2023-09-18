@@ -1,17 +1,19 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "player.hpp"
+#include <vector>
+
+#include "player.h"
 
 namespace personal_portfolio {
-
     /// @brief Main loop of the game.
     class Game {
       private:
         sf::RenderWindow window;
-        Player player;
+        std::vector<GameObject*> game_objects;
 
         void update();
+        void render();
 
       public:
         static Game* instance;
@@ -20,7 +22,7 @@ namespace personal_portfolio {
         ~Game();
         void start();
         void close();
-        sf::RenderWindow& getWindow();
+        sf::RenderWindow& get_window();
     };
 }
 

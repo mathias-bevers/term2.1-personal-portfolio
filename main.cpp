@@ -1,6 +1,6 @@
 #include <iostream>
 #include <limits>
-#include "src/game.hpp"
+#include "src/game.h"
 #include "src/tools/easylogging++.h"
 
 INITIALIZE_EASYLOGGINGPP

@@ -2,6 +2,7 @@
 
 CC = g++
 CFLAGS = -g -Wall
+SFFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 OBJECTS = main.o game.o player.o gameObject.o settings.o
 TARGET = program.out
 BUILD_DIR = build/
@@ -19,7 +20,7 @@ move:
 
 # To run SFML add flags '-lsfml-graphics -lsfml-window -lsfml-system'
 main: $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS) src/tools/easylogging++.cc -lsfml-graphics -lsfml-window -lsfml-system
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS) src/tools/easylogging++.cc $(SFFLAGS)
 
 main.o: game.o
 	$(CC) $(CFLAGS) -c main.cpp

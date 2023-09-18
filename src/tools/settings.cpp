@@ -1,12 +1,10 @@
 #include <limits.h>
 #include <unistd.h>
 
-#include "settings.hpp"
+#include "settings.h"
 
 namespace personal_portfolio {
-    
-
-    std::string getWorkingDir() {
+    std::string get_working_dir() {
         char cwd[PATH_MAX];
 
         if (getcwd(cwd, sizeof(cwd)) != nullptr) {

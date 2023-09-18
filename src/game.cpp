@@ -1,12 +1,10 @@
-
-
-#include "game.hpp"
+#include "game.h"
 #include "tools/easylogging++.h"
 
 namespace personal_portfolio {
     Game* Game::instance;
 
-    Game::Game() : player("test.png") {
+    Game::Game() {
         LOG(INFO) << "Setting up game instance...";
 
         if (Game::instance != nullptr) {
@@ -23,6 +21,8 @@ namespace personal_portfolio {
     void Game::start() {
         LOG(INFO) << "Starting game...";
 
+        game_objects.push_back(new Player("test.png"));
+
         while (window.isOpen()) {
             sf::Event event;
             while (window.pollEvent(event)) {
@@ -33,22 +33,28 @@ namespace personal_portfolio {
 
             window.clear();
             update();
+            render();
             window.display();
         }
     }
 
     void Game::update() {
-        player.update();
-        window.draw(player.getSprite());
+        for (GameObject* game_object : game_objects) {
+            game_object->update();
+        }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
             close();
         }
     }
 
-    sf::RenderWindow& Game::getWindow() {
-        return window;
+    void Game::render() {
+        for (GameObject* game_object : game_objects) {
+            game_object->render(window);
+        }
     }
+
+    sf::RenderWindow& Game::get_window() { return window; }
 
     void Game::close() {
         LOG(INFO) << "Closing game...";
@@ -59,7 +65,7 @@ namespace personal_portfolio {
     }
 
     Game::~Game() {
-        Game::instance = nullptr;
         LOG(INFO) << "Terminating game instance";
+        Game::instance = nullptr;
     }
 }

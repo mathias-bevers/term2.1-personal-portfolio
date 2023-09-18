@@ -1,29 +1,13 @@
 #include <cmath>
 
-#include "game.hpp"
-#include "player.hpp"
+#include "game.h"
+#include "player.h"
 #include "tools/easylogging++.h"
-#include "tools/settings.hpp"
+#include "tools/settings.h"
 
 namespace personal_portfolio {
-    Player::Player(std::string spritePath) : GameObject(sf::Vector2f(500, 500)) {
-        if (!texture.loadFromFile(PATH_IMAGES + spritePath)) {
-            std::string cwd = getWorkingDir();
-
-            if (!cwd.empty()) {
-                LOG(ERROR) << "Could not load texture with path: " << cwd << "/" << spritePath;
-            }
-            else {
-                LOG(ERROR) << "Could not load image or path";
-            }
-
-            exit(0);
-            return;
-        }
-
-        sprite.setTexture(texture);
-        sf::Vector2u textureSize = texture.getSize();
-        sprite.setScale((500.0f / textureSize.x), (500.0f / textureSize.y));
+    Player::Player(std::string sprite_path) : GameObject(sprite_path) { 
+        set_size(sf::Vector2f(500,500));
     }
 
     void Player::update() {
@@ -47,12 +31,13 @@ namespace personal_portfolio {
             input *= 1.0f / magnitude;
         }
 
-        position += input;
-        sprite.setPosition(position);
+        move(input);
     }
 
-    sf::Sprite& Player::getSprite() {
-        return sprite;
+    void Player::move(const sf::Vector2f velocity)
+    {
+        const sf::Vector2f newPosition = get_position() + velocity;
+        set_position(newPosition);
     }
 
     Player::~Player() = default;
