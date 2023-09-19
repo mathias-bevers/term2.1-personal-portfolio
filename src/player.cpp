@@ -1,4 +1,5 @@
 #include <cmath>
+#include <stdexcept>
 
 #include "game.h"
 #include "player.h"
@@ -6,36 +7,39 @@
 #include "tools/settings.h"
 
 namespace personal_portfolio {
-    Player::Player(std::string sprite_path) : GameObject(sprite_path) { set_size(sf::Vector2f(500, 500)); }
+    Player::Player(int id) : GameObject("player.png")
+    {
+        set_size(sf::Vector2f(35, 250));
+
+        if (id < 0 || id > 1) {
+            throw std::out_of_range("id needs to be 0 or 1");
+        }
+
+        up = (id == 0) ? sf::Keyboard::W : sf::Keyboard::Up;
+        down = (id == 0) ? sf::Keyboard::S : sf::Keyboard::Down;
+
+        float x = WINDOW_WIDTH * ((id == 0) ? 0.1f : 0.9f);
+        float y = WINDOW_HIGHT * 0.5f;
+        set_position(sf::Vector2f(x, y));
+    }
 
     void Player::update()
     {
         sf::Vector2f input;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+        if (sf::Keyboard::isKeyPressed(up)) {
             input.y -= 1;
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        if (sf::Keyboard::isKeyPressed(down)) {
             input.y += 1;
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            input.x -= 1;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            input.x += 1;
-        }
 
-        float magnitude = (input.x * input.x) + (input.y * input.y);
-        magnitude = sqrt(magnitude);
-        if (magnitude != 0.0f) {
-            input *= 1.0f / magnitude;
-        }
-
-        move(input);
+        move(input * move_speed);
     }
 
     void Player::move(const sf::Vector2f velocity)
     {
-        const sf::Vector2f newPosition = get_position() + velocity;
+        sf::Vector2f newPosition = get_position() + velocity;
+        newPosition.y = std::clamp(newPosition.y, get_size().y * 0.5f, WINDOW_HIGHT - get_size().y * 0.5f);
         set_position(newPosition);
     }
 

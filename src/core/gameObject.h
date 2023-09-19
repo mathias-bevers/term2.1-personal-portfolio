@@ -23,6 +23,9 @@ namespace personal_portfolio {
 
         const sf::Vector2f get_position() const;
         void set_position(const sf::Vector2f position);
+
+        const sf::Color get_color() const;
+        void set_color(const sf::Color color);
     };
 }
 #endif

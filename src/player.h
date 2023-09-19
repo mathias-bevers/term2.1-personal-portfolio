@@ -8,12 +8,16 @@
 namespace personal_portfolio {
     class Player : public GameObject {
       public:
-        Player(std::string sprite_path);
+        Player(int id);
         ~Player();
 
         void update() override;
 
       private:
+        sf::Keyboard::Key up;
+        sf::Keyboard::Key down;
+        const float move_speed = 0.35f;
+
         void move(const sf::Vector2f velocity);
     };
 }

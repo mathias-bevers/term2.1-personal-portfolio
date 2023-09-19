@@ -5,7 +5,6 @@
 namespace personal_portfolio {
     GameObject::GameObject(std::string sprite_path) : GameObject::GameObject(sprite_path, sf::Vector2f(0, 0))
     {
-
     }
 
     GameObject::GameObject(std::string sprite_path, sf::Vector2f position)
@@ -52,6 +51,10 @@ namespace personal_portfolio {
     const sf::Vector2f GameObject::get_position() const { return sprite.getPosition(); }
 
     void GameObject::set_position(const sf::Vector2f position) { sprite.setPosition(position); }
+
+    const sf::Color GameObject::get_color() const { return sprite.getColor(); }
+
+    void GameObject::set_color(const sf::Color color) { sprite.setColor(color); }
 
     GameObject::~GameObject() = default;
 }
