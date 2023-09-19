@@ -1,12 +1,24 @@
 #include "gameScene.h"
 #include "../player.h"
+#include "../tools/SuperFactory.h"
 
 namespace personal_portfolio {
-    GameScene::GameScene() : Scene("game") { game_objects.push_back(new Player("test.png")); }
+    SF_Register_Type_Base1(SF_Concrete, GameScene, Scene);
+    GameScene::GameScene() : Scene() { }
 
-    void GameScene::update() { }
+    void GameScene::start() 
+    { 
+        Player* player = new Player("test.png");
+        game_objects.push_back(player);
+    }
 
-    void GameScene::render(sf::RenderWindow& window) { }
+    void GameScene::update() {
+        Scene::update();
+     }
+
+    void GameScene::render(sf::RenderWindow& window) { 
+        Scene::render(window);
+    }
 
     GameScene::~GameScene() = default;
 }

@@ -1,12 +1,12 @@
-#include "scene.h"
+#include <sstream>
+
+#include "../tools/SuperFactory.h"
 #include "../tools/easylogging++.h"
+#include "scene.h"
 
 namespace personal_portfolio {
-    Scene::Scene(std::string name)
-    {
-        this->name = name;
-        LOG(INFO) << "Loaded scene: " << this->name;
-    }
+    SF_Register_Type(SF_Abstract, Scene);
+    Scene::Scene() { }
 
     void Scene::update()
     {
@@ -22,16 +22,24 @@ namespace personal_portfolio {
         }
     }
 
-    const std::string Scene::get_name() const { return name; }
+    std::ostream& operator<<(std::ostream& stream, Scene const& scene)
+    {
+        stream << typeid(scene).name() << std::endl;
+        for (GameObject* game_object : scene.game_objects) {
+            stream << "\t" << typeid(game_object).name() << std::endl;
+        }
+
+        return stream;
+    }
 
     Scene::~Scene()
     {
-        for (int i = 0; i < game_objects.size(); ++i) {
+        for (size_t i = 0; i < game_objects.size(); ++i) {
             GameObject* game_object = game_objects.at(i);
             delete game_object;
         }
 
         game_objects.clear();
-        LOG(INFO) << "Offloaded scene: " << name;
+        LOG(INFO) << "Offloaded scene: " << typeid(this).name();
     }
 }

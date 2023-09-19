@@ -5,12 +5,13 @@
 namespace personal_portfolio {
     GameObject::GameObject(std::string sprite_path) : GameObject::GameObject(sprite_path, sf::Vector2f(0, 0))
     {
+
     }
 
     GameObject::GameObject(std::string sprite_path, sf::Vector2f position)
     {
-        sprite_path = PATH_IMAGES + sprite_path;
-        if (!texture.loadFromFile(sprite_path)) {
+        this->sprite_path = PATH_IMAGES + sprite_path;
+        if (!texture.loadFromFile(this->sprite_path)) {
             std::string cwd = get_working_dir();
 
             if (!cwd.empty()) {
@@ -24,7 +25,7 @@ namespace personal_portfolio {
             return;
         }
 
-        sprite.setTexture(texture);
+        sprite = sf::Sprite(texture);
         sprite.setOrigin(0.5, 0.5);
         sprite.setPosition(position);
     }

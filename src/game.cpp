@@ -1,6 +1,7 @@
 #include "game.h"
 #include "tools/easylogging++.h"
 #include "scenes/gameScene.h"
+#include "player.h"
 
 namespace personal_portfolio {
     Game* Game::instance;
@@ -24,9 +25,7 @@ namespace personal_portfolio {
     {
         LOG(INFO) << "Starting game...";
 
-        scene_manager.register_scene(*(new GameScene()));
-
-        // scene_manager.load_scene("GameScene");
+        scene_manager.load_scene("GameScene");
 
         while (window.isOpen()) {
             sf::Event event;

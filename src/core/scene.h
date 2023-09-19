@@ -9,20 +9,19 @@
 
 namespace personal_portfolio {
     class Scene {
-      private:
-        std::string name;
-
       protected:
         std::vector<GameObject*> game_objects;
 
       public:
-        Scene(std::string name);
+        Scene();
         virtual ~Scene();
 
+
+        virtual void start() = 0;
         virtual void update();
         virtual void render(sf::RenderWindow& window);
 
-        const std::string get_name() const;
+        friend std::ostream& operator<<(std::ostream& stream, Scene const& scene);      
     };
 }
 #endif

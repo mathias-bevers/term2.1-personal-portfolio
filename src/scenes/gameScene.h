@@ -9,6 +9,7 @@ namespace personal_portfolio {
         GameScene();
         ~GameScene();
 
+        void start() override;
         void update() override;
         void render(sf::RenderWindow& window) override;
     };
