@@ -3,13 +3,16 @@ BasedOnStyle: LLVM
 IndentWidth: 4
 ---
 Language: Cpp
-IndentExternBlock: AfterExternBlock
 FixNamespaceComments: false
 NamespaceIndentation: All
 AllowShortFunctionsOnASingleLine: All
 AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortBlocksOnASingleLine: Empty
 AlwaysBreakAfterReturnType: None
-ColumnLimit: 0
-BreakBeforeBraces: Custom
-BraceWrapping:
-  BeforeCatch: true
+ColumnLimit: 110
+InsertBraces: true
+PointerAlignment: Left
+ReferenceAlignment: Left
+SpaceInEmptyBlock: true
+BreakConstructorInitializers: AfterColon
+BreakBeforeBraces: Stroustrup

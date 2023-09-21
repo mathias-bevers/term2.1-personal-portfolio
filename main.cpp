@@ -1,17 +1,17 @@
 #include <iostream>
 #include <limits>
+#include "src/game.h"
+#include "src/tools/easylogging++.h"
 
-#include "src/calculator.hpp"
+INITIALIZE_EASYLOGGINGPP
 
-int main() {
-    std::cout << "Mathias Bevers personal portfolio 1\n\n";
+namespace pp = personal_portfolio;
 
-    personal_portfolio::Calculator calculator;
-    calculator.run();
+int main(int argc, char *argv[]) {
+    std::cout << "Mathias Bevers personal portfolio 1" << std::endl;
 
-    std::cout << "Press Enter to continue...";
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    pp::Game game;
+    game.start();
     
-
     return 0;
 }
