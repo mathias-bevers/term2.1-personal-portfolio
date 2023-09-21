@@ -25,7 +25,7 @@ namespace personal_portfolio {
         }
 
         sprite = sf::Sprite(texture);
-        sprite.setOrigin(0.5, 0.5);
+        sprite.setOrigin(sf::Vector2f(texture.getSize()) * 0.5f);
         sprite.setPosition(position);
     }
 
@@ -55,6 +55,18 @@ namespace personal_portfolio {
     const sf::Color GameObject::get_color() const { return sprite.getColor(); }
 
     void GameObject::set_color(const sf::Color color) { sprite.setColor(color); }
+
+    std::ostream& operator<<(std::ostream& stream, GameObject const& game_object)
+    {
+        stream << game_object.sprite_path << std::endl;
+        stream << "\tposition: " << game_object.sprite.getPosition().x << game_object.sprite.getPosition().y
+               << std::endl;
+        stream << "\tsize: " << game_object.get_size().x << game_object.get_size().y << std::endl;
+        stream << "\torigin: " << game_object.sprite.getOrigin().x << game_object.sprite.getOrigin().y
+               << std::endl;
+        stream << "\trotation: " << game_object.sprite.getRotation() << std::endl;
+        return stream;
+    }
 
     GameObject::~GameObject() = default;
 }

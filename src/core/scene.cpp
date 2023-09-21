@@ -25,10 +25,14 @@ namespace personal_portfolio {
     std::ostream& operator<<(std::ostream& stream, Scene const& scene)
     {
         stream << typeid(scene).name() << std::endl;
-        for (GameObject* game_object : scene.game_objects) {
-            stream << "\t" << typeid(game_object).name() << std::endl;
-        }
+        for (size_t i = 0; i < scene.game_objects.size(); ++i) {
+            stream << "\t" << typeid(scene.game_objects.at(i)).name();
 
+            if (i < scene.game_objects.size() - 1) {
+                stream << std::endl;
+            }
+        }
+        
         return stream;
     }
 

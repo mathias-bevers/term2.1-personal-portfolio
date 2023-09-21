@@ -18,7 +18,7 @@ namespace personal_portfolio {
         }
 
         active_scene->start();
-        LOG(INFO) << "Loaded scene: " << active_scene;
+        LOG(INFO) << "Loaded scene: " << *active_scene;
     }
 
     SceneManager::~SceneManager()

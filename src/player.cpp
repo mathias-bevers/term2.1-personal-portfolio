@@ -3,22 +3,21 @@
 
 #include "game.h"
 #include "player.h"
-#include "tools/easylogging++.h"
 #include "tools/settings.h"
 
 namespace personal_portfolio {
-    Player::Player(int id) : GameObject("player.png")
+    Player::Player(int id) : GameObject("player.png"), id(id)
     {
         set_size(sf::Vector2f(35, 250));
 
-        if (id < 0 || id > 1) {
+        if (this->id < 0 || this->id > 1) {
             throw std::out_of_range("id needs to be 0 or 1");
         }
 
-        up = (id == 0) ? sf::Keyboard::W : sf::Keyboard::Up;
-        down = (id == 0) ? sf::Keyboard::S : sf::Keyboard::Down;
+        up = (this->id == 0) ? sf::Keyboard::W : sf::Keyboard::Up;
+        down = (this->id == 0) ? sf::Keyboard::S : sf::Keyboard::Down;
 
-        float x = WINDOW_WIDTH * ((id == 0) ? 0.1f : 0.9f);
+        float x = WINDOW_WIDTH * ((this->id == 0) ? 0.1f : 0.9f);
         float y = WINDOW_HIGHT * 0.5f;
         set_position(sf::Vector2f(x, y));
     }

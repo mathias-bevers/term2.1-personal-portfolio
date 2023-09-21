@@ -1,8 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <string>
-
 #include "core/gameObject.h"
 
 namespace personal_portfolio {
@@ -14,6 +12,7 @@ namespace personal_portfolio {
         void update() override;
 
       private:
+        const int id;
         sf::Keyboard::Key up;
         sf::Keyboard::Key down;
         const float move_speed = 0.35f;

@@ -20,7 +20,7 @@ move:
 
 # To run SFML add flags '-lsfml-graphics -lsfml-window -lsfml-system'
 main: $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS) src/tools/easylogging++.cc $(SFFLAGS)
+	$(CC) -g -o $(TARGET) $(OBJECTS) src/tools/easylogging++.cc $(SFFLAGS)
 
 main.o: game.o
 	$(CC) $(CFLAGS) -c main.cpp
