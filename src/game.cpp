@@ -1,7 +1,8 @@
 #include "game.h"
-#include "tools/easylogging++.h"
-#include "scenes/gameScene.h"
 #include "player.h"
+#include "scenes/gameScene.h"
+#include "tools/easylogging++.h"
+#include "tools/settings.h"
 
 namespace personal_portfolio {
     Game* Game::instance;
@@ -16,7 +17,7 @@ namespace personal_portfolio {
         }
 
         Game::instance = this;
-        window.create(sf::VideoMode(1600, 1000), "Game");
+        window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HIGHT), "Game");
 
         LOG(INFO) << "Setup complete!";
     }

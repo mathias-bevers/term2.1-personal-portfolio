@@ -15,9 +15,7 @@ namespace personal_portfolio {
       public:
         Scene();
         virtual ~Scene();
-
-
-        virtual void start() = 0;
+        
         virtual void update();
         virtual void render(sf::RenderWindow& window);
 

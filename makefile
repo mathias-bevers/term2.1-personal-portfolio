@@ -25,7 +25,7 @@ main: $(OBJECTS)
 main.o: game.o
 	$(CC) $(CFLAGS) -c main.cpp
 
-game.o: player.o sceneManager.o
+game.o: player.o sceneManager.o settings.o
 	$(CC) $(CFLAGS) -c src/game.cpp
 
 player.o: gameObject.o

@@ -16,8 +16,7 @@ namespace personal_portfolio {
             LOG(ERROR) << "Could not load scene with name: " << name;
             exit(1);
         }
-
-        active_scene->start();
+        
         LOG(INFO) << "Loaded scene: " << *active_scene;
     }
 
