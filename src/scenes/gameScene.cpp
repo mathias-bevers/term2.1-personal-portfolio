@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "../ball.h"
+#include "../core/physics/line.h"
 #include "../game.h"
 #include "../player.h"
 #include "../tools/SuperFactory.h"
@@ -14,7 +15,7 @@ namespace personal_portfolio {
     {
         for (int i = 0; i < 2; ++i) {
             Player* player = new Player(i);
-            
+
             const std::vector<PhysicsObject*>& to_add = player->get_physics_objects();
             physics_objects.reserve(physics_objects.size() + to_add.size());
             physics_objects.insert(physics_objects.end(), to_add.begin(), to_add.end());
@@ -23,6 +24,9 @@ namespace personal_portfolio {
         }
 
         game_objects.push_back(new Ball(std::bind(&GameScene::on_score, this, std::placeholders::_1), *this));
+
+        physics_objects.push_back(new Line(0,0, WINDOW_WIDTH, 0));
+        physics_objects.push_back(new Line(WINDOW_WIDTH, WINDOW_HIGHT, 0, WINDOW_HIGHT));
 
         std::string font_path = PATH_FONTS + "5x3.ttf";
         if (!font.loadFromFile(font_path)) {
@@ -51,6 +55,17 @@ namespace personal_portfolio {
         for (std::map<int, ScoreData>::iterator it = score_datas.begin(); it != score_datas.end(); ++it) {
             window.draw(it->second.text);
         }
+
+        if (!DEBUG) {
+            return;
+        }
+
+        for (std::vector<PhysicsObject*>::iterator it = physics_objects.begin(); it != physics_objects.end();
+             ++it) {
+            if (Line* line = dynamic_cast<Line*>(*it)) {
+                line->render(window);
+            }
+        }
     }
 
     void GameScene::on_score(const int player_id)
@@ -58,7 +73,7 @@ namespace personal_portfolio {
         ScoreData& score_data = score_datas[player_id];
         ++score_data.score;
         if (score_data.score == WIN_SCORE) {
-            // TODO: go to game over scene.
+            // TODO: go to game over scene.g
             LOG(INFO) << player_id + 1 << " has won!";
             LOG(WARNING) << "Win is not yet implemented, closing game";
             Game::instance->close();

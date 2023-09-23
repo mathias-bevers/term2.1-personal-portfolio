@@ -4,11 +4,13 @@
 #include "game.h"
 #include "player.h"
 #include "tools/settings.h"
+#include "core/physics/line.h"
 
 namespace personal_portfolio {
     Player::Player(int id) : GameObject("player.png"), id(id)
     {
-        set_size(sf::Vector2f(35, 250));
+        const sf::Vector2f size(35, 250);
+        set_size(size);
 
         if (this->id < 0 || this->id > 1) {
             throw std::out_of_range("id needs to be 0 or 1");
@@ -20,6 +22,12 @@ namespace personal_portfolio {
         float x = WINDOW_WIDTH * ((this->id == 0) ? 0.1f : 0.9f);
         float y = WINDOW_HIGHT * 0.5f;
         set_position(sf::Vector2f(x, y));
+
+        const sf::Vector2f halfSize = size * 0.5f; 
+        physics_objects.push_back(new Line(halfSize.x, -halfSize.y, -halfSize.x, -halfSize.y, this));
+        physics_objects.push_back(new Line(-halfSize.x, halfSize.y, halfSize.x, halfSize.y, this));
+        physics_objects.push_back(new Line(halfSize.x, halfSize.y, halfSize.x, -halfSize.y, this));
+        physics_objects.push_back(new Line(-halfSize.x, -halfSize.y, -halfSize.x, halfSize.y, this));
     }
 
     void Player::update()

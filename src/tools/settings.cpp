@@ -4,6 +4,8 @@
 #include "settings.h"
 
 namespace personal_portfolio {
+    bool DEBUG = false;
+
     std::string get_working_dir()
     {
         char cwd[PATH_MAX];

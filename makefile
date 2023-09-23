@@ -3,7 +3,7 @@
 CC = g++
 CFLAGS = -g -Wall
 SFFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
-OBJECTS = main.o game.o player.o gameObject.o settings.o scene.o sceneManager.o gameScene.o ball.o hit.o physicsObject.o
+OBJECTS = settings.o main.o game.o player.o gameObject.o scene.o sceneManager.o gameScene.o ball.o hit.o physicsObject.o line.o
 TARGET = program.out
 BUILD_DIR = build/
 
@@ -48,6 +48,9 @@ hit.o:
 
 physicsObject.o:
 	$(CC) $(CFLAGS) -c src/core/physics/physicsObject.cpp
+
+line.o:
+	$(CC) $(CFLAGS) -c src/core/physics/line.cpp
 
 gameScene.o: scene.o player.o ball.o
 	$(CC) $(CFLAGS) -c src/scenes/gameScene.cpp

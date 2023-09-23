@@ -13,6 +13,8 @@ namespace personal_portfolio {
     const int WINDOW_HIGHT = 1000;
     const int WIN_SCORE = 5;
 
+    extern bool DEBUG;
+
     std::string get_working_dir();
 }
 #endif
