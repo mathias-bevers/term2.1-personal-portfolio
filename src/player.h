@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "core/gameObject.h"
+#include "scenes/gameScene.h"
 
 namespace personal_portfolio {
     class Player : public GameObject {
@@ -10,8 +11,10 @@ namespace personal_portfolio {
         ~Player();
 
         void update() override;
+        const std::vector<PhysicsObject*>& get_physics_objects() const;
 
       private:
+        std::vector<PhysicsObject*> physics_objects;
         const int id;
         sf::Keyboard::Key up;
         sf::Keyboard::Key down;

@@ -1,8 +1,10 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
-#include "../core/scene.h"
 #include <map>
+
+#include "../core/scene.h"
+#include "../core/physics/physicsObject.h"
 
 namespace personal_portfolio {
     struct ScoreData {
@@ -17,12 +19,14 @@ namespace personal_portfolio {
 
         void update() override;
         void render(sf::RenderWindow& window) override;
+        const std::vector<PhysicsObject*>& get_physics_objects() const;
 
       private:
+        std::vector<PhysicsObject*> physics_objects;
         std::map<int, ScoreData> score_datas = {{0, ScoreData()}, {1, ScoreData()}};
         sf::Font font;
 
-        void on_score(int player_id);
+        void on_score(const int player_id);
     };
 }
 #endif

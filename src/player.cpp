@@ -35,6 +35,8 @@ namespace personal_portfolio {
         move(input * move_speed);
     }
 
+    const std::vector<PhysicsObject*>& Player::get_physics_objects() const { return physics_objects; }
+
     void Player::move(const sf::Vector2f velocity)
     {
         sf::Vector2f newPosition = get_position() + velocity;

@@ -32,15 +32,14 @@ namespace personal_portfolio {
                 stream << std::endl;
             }
         }
-        
+
         return stream;
     }
 
     Scene::~Scene()
     {
         for (size_t i = 0; i < game_objects.size(); ++i) {
-            GameObject* game_object = game_objects.at(i);
-            delete game_object;
+            delete game_objects.at(i);
         }
 
         game_objects.clear();
