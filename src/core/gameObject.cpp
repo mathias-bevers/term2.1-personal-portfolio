@@ -26,12 +26,12 @@ namespace personal_portfolio {
 
         sprite = sf::Sprite(texture);
         sprite.setOrigin(sf::Vector2f(texture.getSize()) * 0.5f);
-        sprite.setPosition(position);
+        this->position = position;
     }
 
     void GameObject::render(sf::RenderWindow& window) const { window.draw(sprite); }
 
-    void GameObject::update() { }
+    void GameObject::update() { sprite.setPosition(position); }
 
     sf::Vector2f GameObject::get_size() const
     {
@@ -48,9 +48,9 @@ namespace personal_portfolio {
         sprite.setScale(scale);
     }
 
-    const sf::Vector2f GameObject::get_position() const { return sprite.getPosition(); }
+    const sf::Vector2f GameObject::get_position() const { return position; }
 
-    void GameObject::set_position(const sf::Vector2f position) { sprite.setPosition(position); }
+    void GameObject::set_position(const sf::Vector2f position) { this->position = position; }
 
     const sf::Color GameObject::get_color() const { return sprite.getColor(); }
 

@@ -7,6 +7,7 @@ namespace personal_portfolio {
         this->toi = toi;
     }
 
+
     const sf::Vector2f Hit::get_normal() const { return normal; }
 
     PhysicsObject& Hit::get_other() const { return other; }

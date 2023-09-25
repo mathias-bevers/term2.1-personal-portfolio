@@ -46,11 +46,19 @@ namespace personal_portfolio {
         return normal;
     }
 
+    const sf::Vector2f Line::get_difference() const { return get_end() - get_start(); }
+
+    const float Line::get_magnitude() const
+    {
+        sf::Vector2f difference = get_difference();
+        return std::sqrt((difference.x * difference.x) + (difference.y * difference.y));
+    }
+
     const sf::Vector2f Line::get_start() const
     {
-        if (get_parent() != nullptr) {
-            auto parent_pos = get_parent()->get_position();
-            auto relative_pos = start + parent_pos;
+        if (parent != nullptr) {
+            sf::Vector2f parent_pos = parent->get_position();
+            sf::Vector2f relative_pos = start + parent_pos;
             return relative_pos;
         }
         else {
@@ -60,9 +68,9 @@ namespace personal_portfolio {
 
     const sf::Vector2f Line::get_end() const
     {
-        if (get_parent() != nullptr) {
-            auto parent_pos = get_parent()->get_position();
-            auto relative_pos = end + parent_pos;
+        if (parent != nullptr) {
+            sf::Vector2f parent_pos= parent->get_position();
+            sf::Vector2f relative_pos = end + parent_pos;
             return relative_pos;
         }
         else {
@@ -72,10 +80,10 @@ namespace personal_portfolio {
 
     void Line::render(sf::RenderWindow& window)
     {
-        // line_vertices[0].position = get_start();
-        // line_vertices[1].position = get_end();
-        // normal_vertices[0].position = get_center();
-        // normal_vertices[1].position = get_center() + (get_normal() * 50.0f);
+        line_vertices[0].position = get_start();
+        line_vertices[1].position = get_end();
+        normal_vertices[0].position = get_center();
+        normal_vertices[1].position = get_center() + (get_normal() * 50.0f);
 
         window.draw(line_vertices, 2, sf::Lines);
         window.draw(normal_vertices, 2, sf::Lines);

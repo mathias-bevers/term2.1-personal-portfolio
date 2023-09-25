@@ -5,14 +5,14 @@
 
 namespace personal_portfolio {
     class PhysicsObject {
-      private:
-        GameObject* parent;
+      protected:
+        const GameObject* parent;
 
       public:
         PhysicsObject(GameObject* parent);
         virtual ~PhysicsObject();
 
-        GameObject* get_parent() const;
+        // GameObject* get_parent() const;GameObject* get_parent() const;
     };
 }
 #endif

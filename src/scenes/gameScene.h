@@ -19,7 +19,7 @@ namespace personal_portfolio {
 
         void update() override;
         void render(sf::RenderWindow& window) override;
-        const std::vector<PhysicsObject*>& get_physics_objects() const;
+        const std::vector<PhysicsObject*>& get_physics_objects();
 
       private:
         std::vector<PhysicsObject*> physics_objects;

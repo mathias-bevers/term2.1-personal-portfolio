@@ -1,10 +1,11 @@
 #include <cmath>
 #include <stdexcept>
 
+#include "core/physics/line.h"
+#include "core/physics/lineCap.h"
 #include "game.h"
 #include "player.h"
 #include "tools/settings.h"
-#include "core/physics/line.h"
 
 namespace personal_portfolio {
     Player::Player(int id) : GameObject("player.png"), id(id)
@@ -23,11 +24,15 @@ namespace personal_portfolio {
         float y = WINDOW_HIGHT * 0.5f;
         set_position(sf::Vector2f(x, y));
 
-        const sf::Vector2f halfSize = size * 0.5f; 
+        const sf::Vector2f halfSize = size * 0.5f;
         physics_objects.push_back(new Line(halfSize.x, -halfSize.y, -halfSize.x, -halfSize.y, this));
         physics_objects.push_back(new Line(-halfSize.x, halfSize.y, halfSize.x, halfSize.y, this));
         physics_objects.push_back(new Line(halfSize.x, halfSize.y, halfSize.x, -halfSize.y, this));
         physics_objects.push_back(new Line(-halfSize.x, -halfSize.y, -halfSize.x, halfSize.y, this));
+        physics_objects.push_back(new LineCap(0, halfSize, this));
+        physics_objects.push_back(new LineCap(0, -halfSize, this));
+        physics_objects.push_back(new LineCap(0, halfSize.x, -halfSize.y, this));
+        physics_objects.push_back(new LineCap(0, -halfSize.x, halfSize.y, this));
     }
 
     void Player::update()
@@ -41,6 +46,7 @@ namespace personal_portfolio {
         }
 
         move(input * move_speed);
+        GameObject::update();
     }
 
     const std::vector<PhysicsObject*>& Player::get_physics_objects() const { return physics_objects; }

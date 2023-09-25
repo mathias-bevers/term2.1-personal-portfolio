@@ -1,6 +1,11 @@
 #include "lineCap.h"
 
 namespace personal_portfolio {
+    LineCap::LineCap(float radius, float x, float y, GameObject* parent) :
+        LineCap::LineCap(radius, sf::Vector2f(x, y), parent)
+    {
+    }
+
     LineCap::LineCap(float radius, sf::Vector2f position, GameObject* parent) :
         PhysicsObject(parent), position(position), radius(radius)
     {

@@ -22,6 +22,9 @@ namespace personal_portfolio {
 
         const sf::Vector2f get_normal() const;
         const sf::Vector2f get_center() const;
+        const sf::Vector2f get_difference() const;
+        const float get_magnitude() const;
+
         const sf::Vector2f get_start() const;
         const sf::Vector2f get_end() const;
         

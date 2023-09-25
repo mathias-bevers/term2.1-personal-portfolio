@@ -8,6 +8,8 @@ namespace personal_portfolio {
     class GameObject {
       private:
         std::string sprite_path;
+        sf::Vector2f position;
+
       protected:
         sf::Texture texture;
         sf::Sprite sprite;

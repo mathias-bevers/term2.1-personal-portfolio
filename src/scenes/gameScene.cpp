@@ -13,21 +13,21 @@ namespace personal_portfolio {
     SF_Register_Type_Base1(SF_Concrete, GameScene, Scene);
     GameScene::GameScene() : Scene()
     {
+        game_objects.push_back(new Ball(std::bind(&GameScene::on_score, this, std::placeholders::_1), *this));
         for (int i = 0; i < 2; ++i) {
             Player* player = new Player(i);
 
-            const std::vector<PhysicsObject*>& to_add = player->get_physics_objects();
-            physics_objects.reserve(physics_objects.size() + to_add.size());
-            physics_objects.insert(physics_objects.end(), to_add.begin(), to_add.end());
+            physics_objects.reserve(physics_objects.size() + player->get_physics_objects().size());
+            physics_objects.insert(physics_objects.end(), player->get_physics_objects().begin(),
+                                   player->get_physics_objects().end());
 
             game_objects.push_back(player);
         }
 
-        game_objects.push_back(new Ball(std::bind(&GameScene::on_score, this, std::placeholders::_1), *this));
+        physics_objects.push_back(new Line(-10, 0, WINDOW_WIDTH + 10, 0));
+        physics_objects.push_back(new Line(WINDOW_WIDTH + 10, WINDOW_HIGHT, -10, WINDOW_HIGHT));
 
-        physics_objects.push_back(new Line(0,0, WINDOW_WIDTH, 0));
-        physics_objects.push_back(new Line(WINDOW_WIDTH, WINDOW_HIGHT, 0, WINDOW_HIGHT));
-
+        // ---------------------------------------------------------- LOADING FONT
         std::string font_path = PATH_FONTS + "5x3.ttf";
         if (!font.loadFromFile(font_path)) {
             LOG(ERROR) << "Could not load font with path: " << get_working_dir() << font_path;
@@ -44,7 +44,7 @@ namespace personal_portfolio {
         score_datas[1].text.setPosition(WINDOW_WIDTH * 0.75, 25);
     }
 
-    const std::vector<PhysicsObject*>& GameScene::get_physics_objects() const { return physics_objects; }
+    const std::vector<PhysicsObject*>& GameScene::get_physics_objects() { return physics_objects; }
 
     void GameScene::update() { Scene::update(); }
 
