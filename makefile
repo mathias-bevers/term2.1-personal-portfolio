@@ -31,7 +31,7 @@ game.o: player.o sceneManager.o settings.o
 player.o: gameObject.o physicsObject.o line.o lineCap.o
 	$(CC) $(CFLAGS) -c src/player.cpp
 
-ball.o: gameObject.o
+ball.o: gameObject.o settings.o
 	$(CC) $(CFLAGS) -c src/ball.cpp
 
 gameObject.o:

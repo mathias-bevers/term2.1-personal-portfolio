@@ -56,26 +56,12 @@ namespace personal_portfolio {
 
     const sf::Vector2f Line::get_start() const
     {
-        if (parent != nullptr) {
-            sf::Vector2f parent_pos = parent->get_position();
-            sf::Vector2f relative_pos = start + parent_pos;
-            return relative_pos;
-        }
-        else {
-            return start;
-        }
+        return parent == nullptr ? start : start + parent->get_position();
     }
 
     const sf::Vector2f Line::get_end() const
     {
-        if (parent != nullptr) {
-            sf::Vector2f parent_pos= parent->get_position();
-            sf::Vector2f relative_pos = end + parent_pos;
-            return relative_pos;
-        }
-        else {
-            return end;
-        }
+        return parent == nullptr ? end : end + parent->get_position();
     }
 
     void Line::render(sf::RenderWindow& window)

@@ -16,5 +16,6 @@ namespace personal_portfolio {
     extern bool DEBUG;
 
     std::string get_working_dir();
+    std::ostream& operator<<(std::ostream& stream, sf::Vector2f const& v);
 }
 #endif

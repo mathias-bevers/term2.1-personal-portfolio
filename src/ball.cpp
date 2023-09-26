@@ -15,6 +15,7 @@ namespace personal_portfolio {
     {
         srand(time(nullptr));
         on_score = callback;
+        radius = get_size().x * 0.5f;
     }
 
     void Ball::update()
@@ -22,6 +23,10 @@ namespace personal_portfolio {
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
             release_ball();
+        }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && DEBUG){
+            can_move = false;
         }
 
         move();
@@ -86,7 +91,7 @@ namespace personal_portfolio {
     const Hit* Ball::find_earliest_hit()
     {
         const Hit* line_hit = find_earliest_line();
-        const Hit* cap_hit = find_earliest_hit();
+        const Hit* cap_hit = find_earliest_cap();
 
         if (line_hit == nullptr && cap_hit == nullptr) {
             return nullptr;
@@ -111,20 +116,18 @@ namespace personal_portfolio {
             if (Line* line = dynamic_cast<Line*>(game_scene.get_physics_objects().at(i))) {
                 sf::Vector2f n = line->get_normal();
 
-                // manual n.dot(line_start - position).
-                float distance = (n.x * (line->get_start().x - get_position().x)) +
-                                 (n.y * (line->get_start().y - get_position().y));
+                sf::Vector2f v = line->get_start() - get_position();
+                float distance = (n.x * v.x) + (n.y * v.y);
 
                 if (distance > radius) {
                     continue;
                 }
 
                 float toi = get_toi_line(line);
-
                 sf::Vector2f poi = previous_position + (velocity * toi);
                 sf::Vector2f relative_line = poi - line->get_start();
                 float projection = (relative_line.x * n.x) + (relative_line.y * n.y);
-
+                
                 if (projection > 0 && projection < line->get_magnitude()) {
                     if (toi < t) {
                         Hit* h = new Hit(n, *line, toi);
@@ -176,9 +179,9 @@ namespace personal_portfolio {
     const float Ball::get_toi_line(Line* line)
     {
         sf::Vector2f normal = line->get_normal();
-        sf::Vector2f old_difference = line->get_start() - previous_position;
+        sf::Vector2f old_difference = previous_position - line->get_start();
         float a = ((normal.x * old_difference.x) + (normal.y * old_difference.y)) - radius;
-        float b = (normal.x * velocity.x) + (normal.y * velocity.y);
+        float b = -((normal.x * velocity.x) + (normal.y * velocity.y));
 
         if (b < 0) {
             return std::numeric_limits<float>::infinity();

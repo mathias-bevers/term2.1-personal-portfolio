@@ -1,3 +1,6 @@
+#include <cmath>
+#include <iomanip>
+#include <iostream>
 #include <limits.h>
 #include <unistd.h>
 
@@ -13,7 +16,14 @@ namespace personal_portfolio {
         if (getcwd(cwd, sizeof(cwd)) != nullptr) {
             return std::string(cwd);
         }
-        
+
         return std::string();
+    }
+
+    std::ostream& operator<<(std::ostream& stream, sf::Vector2f const& v)
+    {
+        stream << std::fixed;
+        stream << "[" << std::setprecision(v.x) << "," << std::setprecision(v.y) << "]";
+        return stream;
     }
 }

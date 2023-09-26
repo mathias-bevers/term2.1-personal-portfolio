@@ -23,7 +23,7 @@ namespace personal_portfolio {
         sf::Vector2f previous_position;
         sf::Vector2f velocity;
         bool can_move = false;
-        int radius;
+        float radius;
 
         void move();
         void release_ball();

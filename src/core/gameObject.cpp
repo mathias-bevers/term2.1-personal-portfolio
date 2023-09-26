@@ -59,12 +59,9 @@ namespace personal_portfolio {
     std::ostream& operator<<(std::ostream& stream, GameObject const& game_object)
     {
         stream << game_object.sprite_path << std::endl;
-        stream << "\tposition: " << game_object.sprite.getPosition().x << game_object.sprite.getPosition().y
-               << std::endl;
-        stream << "\tsize: " << game_object.get_size().x << game_object.get_size().y << std::endl;
-        stream << "\torigin: " << game_object.sprite.getOrigin().x << game_object.sprite.getOrigin().y
-               << std::endl;
-        stream << "\trotation: " << game_object.sprite.getRotation() << std::endl;
+        stream << "\tposition: " << game_object.get_position() << std::endl;
+        stream << "\tsize: " << game_object.get_size() << std::endl;
+        stream << "\torigin: " << game_object.sprite.getOrigin() << std::endl;
         return stream;
     }
 
