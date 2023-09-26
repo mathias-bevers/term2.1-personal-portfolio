@@ -9,6 +9,8 @@
 #include "core/physics/lineCap.h"
 #include "tools/settings.h"
 
+#define PI 3.14159265
+
 namespace personal_portfolio {
     Ball::Ball(std::function<void(int)> callback, GameScene& game_scene) :
         GameObject("ball.png", sf::Vector2f(WINDOW_WIDTH, WINDOW_HIGHT) * 0.5f), game_scene(game_scene)
@@ -25,7 +27,7 @@ namespace personal_portfolio {
             release_ball();
         }
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && DEBUG){
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1) && DEBUG) {
             can_move = false;
         }
 
@@ -57,11 +59,13 @@ namespace personal_portfolio {
             position = previous_position + velocity * hit->get_toi();
 
             float bounciness = 1.0f;
-            // TODO: increase velocity if hit is player.
+            if (hit->get_other().get_parent() != nullptr) {
+                bounciness = 1.1f;
+            }
 
             // Reflect velocity.
             const sf::Vector2f hit_normal = hit->get_normal();
-            const float dot = (velocity.x * hit_normal.x) + (velocity.x * hit_normal.y);
+            const float dot = (velocity.x * hit_normal.x) + (velocity.y * hit_normal.y);
             const float factor = (-1.0f - bounciness) * dot;
             velocity =
                 sf::Vector2f((factor * hit_normal.x) + velocity.x, (factor * hit_normal.y) + velocity.y);
@@ -78,8 +82,11 @@ namespace personal_portfolio {
             return;
         }
 
-        const float x = (rand() % 200 - 100) / 100.0f;
-        const float y = (rand() % 200 - 100) / 100.0f;
+        float angle = ((rand() % 450) / 100.0f) + 45;
+        angle += (rand() % 2) == 0 ? 0 : 180;
+
+        const float x = std::sin((angle * PI) / 180.0f);
+        const float y = std::cos((angle * PI) / 180.0f);
         const float magintude = std::sqrt((x * x) + (y * y));
         const float scale = 1.0f / magintude;
 
@@ -126,8 +133,12 @@ namespace personal_portfolio {
                 float toi = get_toi_line(line);
                 sf::Vector2f poi = previous_position + (velocity * toi);
                 sf::Vector2f relative_line = poi - line->get_start();
-                float projection = (relative_line.x * n.x) + (relative_line.y * n.y);
-                
+                sf::Vector2f line_difference = line->get_difference();
+                line_difference *= (1.0f / std::sqrt((line_difference.x * line_difference.x) +
+                                                     (line_difference.y * line_difference.y)));
+                float projection =
+                    (relative_line.x * line_difference.x + relative_line.y * line_difference.y);
+
                 if (projection > 0 && projection < line->get_magnitude()) {
                     if (toi < t) {
                         Hit* h = new Hit(n, *line, toi);

@@ -11,7 +11,10 @@ namespace personal_portfolio {
     {
     }
 
-    const sf::Vector2f& LineCap::get_postion() const { return position; }
+    const sf::Vector2f LineCap::get_postion() const
+    {
+        return parent == nullptr ? position : position + parent->get_position();
+    }
 
     const float LineCap::get_radius() const { return radius; }
 

@@ -11,6 +11,8 @@ namespace personal_portfolio {
       public:
         PhysicsObject(const GameObject* parent = nullptr);
         virtual ~PhysicsObject();
+
+        const GameObject* get_parent() const;
     };
 }
 #endif

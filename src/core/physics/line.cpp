@@ -13,6 +13,9 @@ namespace personal_portfolio {
         this->start = start;
         this->end = end;
 
+        sf::Vector2f difference = end - start;
+        magnitude = sqrt((difference.x * difference.x) + (difference.y * difference.y));
+
         sf::Color line_color(0, 252, 60);
         line_vertices[0].position = get_start();
         line_vertices[0].color = line_color;
@@ -48,11 +51,7 @@ namespace personal_portfolio {
 
     const sf::Vector2f Line::get_difference() const { return get_end() - get_start(); }
 
-    const float Line::get_magnitude() const
-    {
-        sf::Vector2f difference = get_difference();
-        return std::sqrt((difference.x * difference.x) + (difference.y * difference.y));
-    }
+    const float Line::get_magnitude() const { return magnitude; }
 
     const sf::Vector2f Line::get_start() const
     {

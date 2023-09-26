@@ -15,6 +15,7 @@ namespace personal_portfolio {
 
         sf::Vector2f start;
         sf::Vector2f end;
+        float magnitude;
 
       public:
         Line(int start_x, int start_y, int end_x, int end_y, GameObject* parent = nullptr);
