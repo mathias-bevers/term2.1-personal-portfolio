@@ -11,6 +11,7 @@ namespace personal_portfolio {
     class Scene {
       protected:
         std::vector<GameObject*> game_objects;
+        std::string name;
 
       public:
         Scene();
@@ -18,6 +19,8 @@ namespace personal_portfolio {
 
         virtual void update();
         virtual void render(sf::RenderWindow& window);
+
+        void set_name();
 
         friend std::ostream& operator<<(std::ostream& stream, Scene const& scene);
     };

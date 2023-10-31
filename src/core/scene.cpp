@@ -10,7 +10,7 @@ namespace personal_portfolio {
 
     void Scene::update()
     {
-        for(size_t i = 0; i < game_objects.size(); ++i){
+        for (size_t i = 0; i < game_objects.size(); ++i) {
             game_objects.at(i)->update();
         }
     }
@@ -20,6 +20,13 @@ namespace personal_portfolio {
         for (GameObject* game_object : game_objects) {
             game_object->render(window);
         }
+    }
+
+    void Scene::set_name()
+    {
+        std::stringstream ss;
+        ss << *this;
+        name = ss.str();
     }
 
     std::ostream& operator<<(std::ostream& stream, Scene const& scene)
@@ -35,6 +42,6 @@ namespace personal_portfolio {
         }
 
         game_objects.clear();
-        LOG(INFO) << "Offloaded scene: " << typeid(this).name();
+        LOG(INFO) << "Deleted scene: " << *this;
     }
 }

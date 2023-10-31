@@ -9,16 +9,17 @@ namespace personal_portfolio {
 
     void SceneManager::load_scene(std::string name)
     {
-        if (active_scene != nullptr) {
-            delete active_scene;
-        }
+        // if (active_scene != nullptr) {
+        //     delete active_scene;
+        // }
 
         if (!SuperFactory::Create(name, active_scene)) {
             LOG(ERROR) << "Could not load scene with name: " << name;
             exit(1);
         }
 
-        LOG(INFO) << "Loaded scene: " << *active_scene;
+        active_scene->set_name();
+        LOG(INFO) << "Loaded scene: " << get_active_scene();
     }
 
     SceneManager::~SceneManager()

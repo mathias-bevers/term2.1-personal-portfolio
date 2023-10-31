@@ -47,7 +47,8 @@ namespace personal_portfolio {
 
     void Game::update()
     {
-        scene_manager->get_active_scene().update();
+        Scene& scene = scene_manager->get_active_scene(); 
+        scene.update();
 
         if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
             return;
