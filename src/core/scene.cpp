@@ -13,6 +13,12 @@ namespace personal_portfolio {
         for (size_t i = 0; i < game_objects.size(); ++i) {
             game_objects.at(i)->update();
         }
+
+        if (!is_pending_destroy) {
+            return;
+        }
+
+        delete this;
     }
 
     void Scene::render(sf::RenderWindow& window)
@@ -28,6 +34,8 @@ namespace personal_portfolio {
         ss << *this;
         name = ss.str();
     }
+
+    void Scene::await_destroy() { is_pending_destroy = true; }
 
     std::ostream& operator<<(std::ostream& stream, Scene const& scene)
     {
