@@ -17,7 +17,9 @@ namespace personal_portfolio {
         }
 
         Game::instance = this;
+
         window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HIGHT), "Game");
+        scene_manager = new SceneManager();
 
         LOG(INFO) << "Setup complete!";
     }
@@ -26,7 +28,7 @@ namespace personal_portfolio {
     {
         LOG(INFO) << "Starting game...";
 
-        scene_manager.load_scene("GameScene");
+        scene_manager->load_scene("StartScene");
 
         while (window.isOpen()) {
             sf::Event event;
@@ -45,7 +47,7 @@ namespace personal_portfolio {
 
     void Game::update()
     {
-        scene_manager.get_active_scene().update();
+        scene_manager->get_active_scene().update();
 
         if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
             return;
@@ -54,7 +56,11 @@ namespace personal_portfolio {
         close();
     }
 
-    void Game::render() { scene_manager.get_active_scene().render(window); }
+    void Game::render() { scene_manager->get_active_scene().render(window); }
+
+    SceneManager& Game::get_scene_manager() const { return *scene_manager; }
+
+    const sf::RenderWindow& Game::get_window() const { return window; }
 
     void Game::close()
     {

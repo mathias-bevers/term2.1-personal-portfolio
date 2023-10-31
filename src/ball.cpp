@@ -58,17 +58,13 @@ namespace personal_portfolio {
             // Move to hit postion by velocity * time of impact;
             position = previous_position + velocity * hit->get_toi();
 
-            float bounciness = 1.0f;
-            if (hit->get_other().get_parent() != nullptr) {
-                bounciness = 1.1f;
-            }
+            //TODO: increase on velocity on player hit.
 
             // Reflect velocity.
             const sf::Vector2f hit_normal = hit->get_normal();
             const float dot = (velocity.x * hit_normal.x) + (velocity.y * hit_normal.y);
-            const float factor = (-1.0f - bounciness) * dot;
-            velocity =
-                sf::Vector2f((factor * hit_normal.x) + velocity.x, (factor * hit_normal.y) + velocity.y);
+            const sf::Vector2f reflection(velocity - (2 * dot * hit_normal));
+            velocity = reflection;
 
             delete hit;
         }

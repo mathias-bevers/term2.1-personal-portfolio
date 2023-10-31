@@ -3,7 +3,7 @@
 CC = g++
 CFLAGS = -g -Wall
 SFFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
-OBJECTS = settings.o main.o game.o player.o gameObject.o scene.o sceneManager.o gameScene.o ball.o hit.o physicsObject.o line.o lineCap.o
+OBJECTS = settings.o main.o game.o player.o gameObject.o scene.o sceneManager.o gameScene.o ball.o hit.o physicsObject.o line.o lineCap.o startScene.o button.o
 TARGET = program.out
 BUILD_DIR = build/
 
@@ -25,7 +25,7 @@ main: $(OBJECTS)
 main.o: game.o
 	$(CC) $(CFLAGS) -c main.cpp
 
-game.o: player.o sceneManager.o settings.o
+game.o: player.o sceneManager.o settings.o startScene.o
 	$(CC) $(CFLAGS) -c src/game.cpp
 
 player.o: gameObject.o physicsObject.o line.o lineCap.o
@@ -39,6 +39,9 @@ gameObject.o:
 
 scene.o: gameObject.o
 	$(CC) $(CFLAGS) -c src/core/scene.cpp
+
+button.o: gameObject.o
+	$(CC) $(CFLAGS) -c src/core/button.cpp
 
 sceneManager.o: scene.o
 	$(CC) $(CFLAGS) -c src/core/sceneManager.cpp
@@ -57,6 +60,9 @@ lineCap.o:
 
 gameScene.o: scene.o player.o ball.o
 	$(CC) $(CFLAGS) -c src/scenes/gameScene.cpp
+
+startScene.o: gameScene.o scene.o button.o
+	$(CC) $(CFLAGS) -c src/scenes/startScene.cpp
 
 settings.o:
 	$(CC) $(CFLAGS) -c src/tools/settings.cpp

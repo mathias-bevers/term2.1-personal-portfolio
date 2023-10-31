@@ -10,7 +10,7 @@ namespace personal_portfolio {
     class Game {
       private:
         sf::RenderWindow window;
-        SceneManager scene_manager;
+        SceneManager* scene_manager;
 
         void update();
         void render();
@@ -24,6 +24,7 @@ namespace personal_portfolio {
         void close();
 
         SceneManager& get_scene_manager() const;
+        const sf::RenderWindow& get_window() const;
     };
 }
 

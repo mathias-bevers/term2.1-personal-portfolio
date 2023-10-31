@@ -19,7 +19,7 @@ namespace personal_portfolio {
         GameObject(std::string sprite_path);
         virtual ~GameObject();
 
-        void render(sf::RenderWindow& window) const;
+        virtual void render(sf::RenderWindow& window) const;
         virtual void update();
 
         sf::Vector2f get_size() const;

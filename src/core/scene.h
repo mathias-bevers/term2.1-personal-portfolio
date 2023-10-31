@@ -15,11 +15,11 @@ namespace personal_portfolio {
       public:
         Scene();
         virtual ~Scene();
-        
+
         virtual void update();
         virtual void render(sf::RenderWindow& window);
 
-        friend std::ostream& operator<<(std::ostream& stream, Scene const& scene);      
+        friend std::ostream& operator<<(std::ostream& stream, Scene const& scene);
     };
 }
 #endif

@@ -10,8 +10,8 @@ namespace personal_portfolio {
 
     void Scene::update()
     {
-        for (GameObject* game_object : game_objects) {
-            game_object->update();
+        for(size_t i = 0; i < game_objects.size(); ++i){
+            game_objects.at(i)->update();
         }
     }
 
@@ -24,15 +24,7 @@ namespace personal_portfolio {
 
     std::ostream& operator<<(std::ostream& stream, Scene const& scene)
     {
-        stream << typeid(scene).name() << std::endl;
-        for (size_t i = 0; i < scene.game_objects.size(); ++i) {
-            stream << "\t" << typeid(scene.game_objects.at(i)).name();
-
-            if (i < scene.game_objects.size() - 1) {
-                stream << std::endl;
-            }
-        }
-
+        stream << typeid(scene).name();
         return stream;
     }
 
