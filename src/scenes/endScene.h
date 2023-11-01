@@ -1,23 +1,21 @@
-#ifndef STARTSCENE_H
-#define STARTSCENE_H
+#ifndef ENDSCENE_H
+#define ENDSCENE_H
 
 #include "../core/scene.h"
 
 namespace personal_portfolio {
-    class StartScene : public Scene {
+    class EndScene : public Scene {
       public:
-        StartScene();
-        ~StartScene();
+        EndScene();
+        ~EndScene();
 
         void render(sf::RenderWindow& window) override;
 
       private:
         sf::Font font;
         sf::Text title;
-        sf::Text subtitle;
-
-        void load_game();
-        void quit_game();
+        
+        void continue_to_menu();
     };
 }
 #endif

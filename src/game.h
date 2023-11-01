@@ -11,6 +11,7 @@ namespace personal_portfolio {
       private:
         sf::RenderWindow window;
         SceneManager* scene_manager;
+        int winner_id = -1;
 
         void update();
         void render();
@@ -25,6 +26,9 @@ namespace personal_portfolio {
 
         SceneManager& get_scene_manager() const;
         const sf::RenderWindow& get_window() const;
+
+        void set_winner(int player_id);
+        const int get_winner() const;
     };
 }
 

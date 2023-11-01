@@ -47,7 +47,7 @@ namespace personal_portfolio {
 
     void Game::update()
     {
-        Scene& scene = scene_manager->get_active_scene(); 
+        Scene& scene = scene_manager->get_active_scene();
         scene.update();
 
         if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
@@ -62,6 +62,10 @@ namespace personal_portfolio {
     SceneManager& Game::get_scene_manager() const { return *scene_manager; }
 
     const sf::RenderWindow& Game::get_window() const { return window; }
+
+    void Game::set_winner(int player_id) { winner_id = player_id; }
+
+    const int Game::get_winner() const { return winner_id; }
 
     void Game::close()
     {

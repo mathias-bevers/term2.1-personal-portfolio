@@ -76,7 +76,8 @@ namespace personal_portfolio {
             // TODO: go to game over scene.g
             LOG(INFO) << player_id + 1 << " has won!";
             LOG(WARNING) << "Win is not yet implemented, closing game";
-            Game::instance->close();
+            Game::instance->set_winner(player_id);
+            Game::instance->get_scene_manager().load_scene("EndScene");
             return;
         }
 

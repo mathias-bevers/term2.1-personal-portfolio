@@ -1,5 +1,6 @@
 #include "button.h"
 #include "../game.h"
+#include "../tools/easylogging++.h"
 #include "../tools/settings.h"
 
 namespace personal_portfolio {
@@ -8,6 +9,7 @@ namespace personal_portfolio {
     {
         font_name = PATH_FONTS + (font_name.empty() ? "5x3.ttf" : font_name);
         if (!font.loadFromFile(font_name)) {
+            LOG(ERROR) << "could not load font from file: " << font_name;
             exit(1);
         }
         on_click = callback;
@@ -41,20 +43,10 @@ namespace personal_portfolio {
 
     bool Button::is_hovering()
     {
-        const sf::RenderWindow& window = Game::instance->get_window();
-        const sf::Vector2f mouse_position = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+        const sf::Vector2f mouse_position =
+            sf::Vector2f(sf::Mouse::getPosition(Game::instance->get_window()));
 
-        const sf::Vector2f min = get_position() - (get_size() * 0.5f);
-        const sf::Vector2f max = get_position() + (get_size() * 0.5f);
-
-        if (mouse_position.x < min.x || mouse_position.x > max.x) {
-            return false;
-        }
-        if (mouse_position.y < min.y || mouse_position.y > max.y) {
-            return false;
-        }
-
-        return true;
+        return sprite.getGlobalBounds().contains(mouse_position);
     }
 
     Button::~Button() = default;
