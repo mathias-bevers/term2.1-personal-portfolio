@@ -11,17 +11,20 @@ namespace personal_portfolio {
     class Scene {
       protected:
         std::vector<GameObject*> game_objects;
+        std::string name;
+        bool is_pending_destroy = false;
 
       public:
         Scene();
         virtual ~Scene();
 
-
-        virtual void start() = 0;
         virtual void update();
         virtual void render(sf::RenderWindow& window);
 
-        friend std::ostream& operator<<(std::ostream& stream, Scene const& scene);      
+        void set_name();
+        void await_destroy();
+
+        friend std::ostream& operator<<(std::ostream& stream, Scene const& scene);
     };
 }
 #endif

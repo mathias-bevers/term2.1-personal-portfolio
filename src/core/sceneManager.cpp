@@ -1,24 +1,25 @@
 #include "sceneManager.h"
-#include "../tools/easylogging++.h"
 #include "../tools/SuperFactory.h"
+#include "../tools/easylogging++.h"
 
 namespace personal_portfolio {
-    SceneManager::SceneManager() = default;
+    SceneManager::SceneManager() { active_scene = nullptr; }
 
     Scene& SceneManager::get_active_scene() const { return *active_scene; }
 
     void SceneManager::load_scene(std::string name)
     {
-        delete active_scene;
+        if (active_scene != nullptr) {
+            active_scene->await_destroy();
+        }
 
-        if(!SuperFactory::Create(name, active_scene))
-        {
+        if (!SuperFactory::Create(name, active_scene)) {
             LOG(ERROR) << "Could not load scene with name: " << name;
             exit(1);
         }
 
-        active_scene->start();
-        LOG(INFO) << "Loaded scene: " << active_scene;
+        active_scene->set_name();
+        LOG(INFO) << "Loaded scene: " << get_active_scene();
     }
 
     SceneManager::~SceneManager()

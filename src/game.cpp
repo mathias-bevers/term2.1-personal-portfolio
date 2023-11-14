@@ -1,7 +1,8 @@
 #include "game.h"
-#include "tools/easylogging++.h"
-#include "scenes/gameScene.h"
 #include "player.h"
+#include "scenes/gameScene.h"
+#include "tools/easylogging++.h"
+#include "tools/settings.h"
 
 namespace personal_portfolio {
     Game* Game::instance;
@@ -16,7 +17,9 @@ namespace personal_portfolio {
         }
 
         Game::instance = this;
-        window.create(sf::VideoMode(1600, 1000), "Game");
+
+        window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HIGHT), "Game");
+        scene_manager = new SceneManager();
 
         LOG(INFO) << "Setup complete!";
     }
@@ -25,7 +28,7 @@ namespace personal_portfolio {
     {
         LOG(INFO) << "Starting game...";
 
-        scene_manager.load_scene("GameScene");
+        scene_manager->load_scene("StartScene");
 
         while (window.isOpen()) {
             sf::Event event;
@@ -44,7 +47,8 @@ namespace personal_portfolio {
 
     void Game::update()
     {
-        scene_manager.get_active_scene().update();
+        Scene& scene = scene_manager->get_active_scene();
+        scene.update();
 
         if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
             return;
@@ -53,7 +57,15 @@ namespace personal_portfolio {
         close();
     }
 
-    void Game::render() { scene_manager.get_active_scene().render(window); }
+    void Game::render() { scene_manager->get_active_scene().render(window); }
+
+    SceneManager& Game::get_scene_manager() const { return *scene_manager; }
+
+    const sf::RenderWindow& Game::get_window() const { return window; }
+
+    void Game::set_winner(int player_id) { winner_id = player_id; }
+
+    const int Game::get_winner() const { return winner_id; }
 
     void Game::close()
     {

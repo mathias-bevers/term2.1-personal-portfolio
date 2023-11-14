@@ -5,7 +5,6 @@
 namespace personal_portfolio {
     GameObject::GameObject(std::string sprite_path) : GameObject::GameObject(sprite_path, sf::Vector2f(0, 0))
     {
-
     }
 
     GameObject::GameObject(std::string sprite_path, sf::Vector2f position)
@@ -26,13 +25,13 @@ namespace personal_portfolio {
         }
 
         sprite = sf::Sprite(texture);
-        sprite.setOrigin(0.5, 0.5);
-        sprite.setPosition(position);
+        sprite.setOrigin(sf::Vector2f(texture.getSize()) * 0.5f);
+        this->position = position;
     }
 
     void GameObject::render(sf::RenderWindow& window) const { window.draw(sprite); }
 
-    void GameObject::update() { }
+    void GameObject::update() { sprite.setPosition(position); }
 
     sf::Vector2f GameObject::get_size() const
     {
@@ -49,9 +48,22 @@ namespace personal_portfolio {
         sprite.setScale(scale);
     }
 
-    const sf::Vector2f GameObject::get_position() const { return sprite.getPosition(); }
+    const sf::Vector2f GameObject::get_position() const { return position; }
 
-    void GameObject::set_position(const sf::Vector2f position) { sprite.setPosition(position); }
+    void GameObject::set_position(const sf::Vector2f position) { this->position = position; }
+
+    const sf::Color GameObject::get_color() const { return sprite.getColor(); }
+
+    void GameObject::set_color(const sf::Color color) { sprite.setColor(color); }
+
+    std::ostream& operator<<(std::ostream& stream, GameObject const& game_object)
+    {
+        stream << game_object.sprite_path << std::endl;
+        stream << "\tposition: " << game_object.get_position() << std::endl;
+        stream << "\tsize: " << game_object.get_size() << std::endl;
+        stream << "\torigin: " << game_object.sprite.getOrigin() << std::endl;
+        return stream;
+    }
 
     GameObject::~GameObject() = default;
 }

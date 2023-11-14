@@ -10,9 +10,15 @@ namespace personal_portfolio {
 
     void Scene::update()
     {
-        for (GameObject* game_object : game_objects) {
-            game_object->update();
+        for (size_t i = 0; i < game_objects.size(); ++i) {
+            game_objects.at(i)->update();
         }
+
+        if (!is_pending_destroy) {
+            return;
+        }
+
+        delete this;
     }
 
     void Scene::render(sf::RenderWindow& window)
@@ -22,24 +28,28 @@ namespace personal_portfolio {
         }
     }
 
+    void Scene::set_name()
+    {
+        std::stringstream ss;
+        ss << *this;
+        name = ss.str();
+    }
+
+    void Scene::await_destroy() { is_pending_destroy = true; }
+
     std::ostream& operator<<(std::ostream& stream, Scene const& scene)
     {
-        stream << typeid(scene).name() << std::endl;
-        for (GameObject* game_object : scene.game_objects) {
-            stream << "\t" << typeid(game_object).name() << std::endl;
-        }
-
+        stream << typeid(scene).name();
         return stream;
     }
 
     Scene::~Scene()
     {
         for (size_t i = 0; i < game_objects.size(); ++i) {
-            GameObject* game_object = game_objects.at(i);
-            delete game_object;
+            delete game_objects.at(i);
         }
 
         game_objects.clear();
-        LOG(INFO) << "Offloaded scene: " << typeid(this).name();
+        LOG(INFO) << "Deleted scene: " << *this;
     }
 }
